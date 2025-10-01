@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # API FastAPI
+  api:
+    build: .
+    container_name: facial_analyzer_api
+    
+    # Acesso à webcam
+    devices:
+      - /dev/video0:/dev/video0
+    
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    
+    volumes:
+      # Código fonte (hot reload)
+      - ./src:/app/src
+      # Relatórios gerados
+      - ./reports:/app/reports
+    
+    ports:
+      - "8000:8000"
+    
+    privileged: true
+    
+    command: uvicorn src.api:app --host 0.0.0.0 --port 8000 --reload
+    
+    networks:
+      - facial-network
+
+  # Frontend Streamlit
+  frontend:
+    build: .
+    container_name: facial_analyzer_frontend
+    
+    environment:
+      - API_URL=http://api:8000
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    
+    volumes:
+      # Código fonte (hot reload)
+      - ./src:/app/src
+      - ./reports:/app/reports
+    
+    ports:
+      - "8501:8501"
+    
+    depends_on:
+      - api
+    
+    command: streamlit run src/app.py --server.port=8501 --server.address=0.0.0.0
+    
+    networks:
+      - facial-network
+
+networks:
+  facial-network:
+    driver: bridge
