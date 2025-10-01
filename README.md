@@ -30,7 +30,9 @@ cp .env.example .env
 ```
 
 # Run
+```bash
 docker-compose up --build
+```
 
 ## Access
 
