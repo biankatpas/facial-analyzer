@@ -2,6 +2,8 @@
 
 AI-powered facial expression analysis system for recruitment processes. Analyzes candidates' emotions during video interviews to provide insights for HR professionals.
 
+📹 [Watch Project Explanation on YouTube](https://youtu.be/1HvwPApSk9E)
+
 ## Features
 
 - 📹 **Video-based Analysis** - Upload candidate interview videos for frame-by-frame emotion detection
