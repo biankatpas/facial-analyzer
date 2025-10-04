@@ -29,7 +29,7 @@ cd projeto-facial-rh
 cp .env.example .env
 ```
 
-# Run
+# Docker
 ```bash
 docker-compose up --build
 ```

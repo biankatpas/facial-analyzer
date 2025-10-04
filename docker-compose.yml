@@ -1,14 +1,8 @@
-version: '3.8'
-
 services:
   # API FastAPI
   api:
     build: .
     container_name: facial_analyzer_api
-    
-    # Acesso à webcam
-    devices:
-      - /dev/video0:/dev/video0
     
     environment:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
@@ -33,7 +27,7 @@ services:
   frontend:
     build: .
     container_name: facial_analyzer_frontend
-    
+ 
     environment:
       - API_URL=http://api:8000
       - GEMINI_API_KEY=${GEMINI_API_KEY}
