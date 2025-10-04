@@ -39,6 +39,10 @@ docker-compose up --build
 - API: http://localhost:8000
 - Streamlit: http://localhost:8501
 
+## Dataset
+
+- Public Videos: https://www.pexels.com/search/videos/person%20talking/
+
 ## Important
 
 ⚠️ Use responsibly: Obtain consent, comply with data protection regulations, and never use as sole evaluation criterion.
