@@ -223,6 +223,23 @@ with col1:
                         st.markdown("#### Emotion Statistics")
                         emotions_only = df.drop('Timestamp (s)', axis=1)
                         st.dataframe(emotions_only.describe())
+                        
+                        # TOP 3 EMOÇÕES COM MEDALHAS
+                        st.markdown("#### 🏆 Top 3 Emotions Detected")
+                        
+                        # Calcular média de cada emoção
+                        emotion_averages = emotions_only.mean().sort_values(ascending=False)
+                        medals = ['🥇', '🥈', '🥉']
+                        
+                        top3_cols = st.columns(3)
+                        for idx, (emotion, avg_score) in enumerate(emotion_averages.head(3).items()):
+                            with top3_cols[idx]:
+                                st.markdown(f"### {medals[idx]} {emotion.upper()}")
+                                st.metric(
+                                    label="Average Score",
+                                    value=f"{avg_score:.1f}%",
+                                    delta=f"Peak: {emotions_only[emotion].max():.1f}%"
+                                )
             
             # Botão para próxima pergunta
             if st.session_state.video_analyzed:
@@ -293,19 +310,24 @@ if st.session_state.current_question >= len(QUESTIONS) and st.session_state.all_
             if summary_data and summary_data.get('summary'):
                 summary = summary_data['summary']
                 
-                # Mostrar top 3 emoções
+                # TOP 3 EMOÇÕES COM MEDALHAS
+                st.markdown("#### 🏆 Top 3 Candidate Emotions")
+                
+                # Mostrar top 3 emoções com medalhas
                 sorted_emotions = sorted(
                     summary.items(), 
                     key=lambda x: x[1]['media'], 
                     reverse=True
                 )
                 
-                cols = st.columns(min(3, len(sorted_emotions)))
+                medals = ['🥇', '🥈', '🥉']
+                cols = st.columns(3)
                 
                 for idx, (emotion, stats) in enumerate(sorted_emotions[:3]):
                     with cols[idx]:
+                        st.markdown(f"### {medals[idx]} {emotion.upper()}")
                         st.metric(
-                            label=emotion.upper(),
+                            label="Average Score",
                             value=f"{stats['media']:.1f}%",
                             delta=f"Range: {stats['min']:.1f}% - {stats['max']:.1f}%"
                         )
