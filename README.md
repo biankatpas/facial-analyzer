@@ -31,16 +31,16 @@ AI-powered facial expression analysis system for recruitment processes. Analyzes
 ```
 facial-analyzer/
 ├── docker-compose.yml       # Container orchestration
-├── Dockerfile              # Container image
-├── requirements.txt        # Python dependencies
-├── .env.example           # Environment variables template
+├── Dockerfile               # Container image
+├── requirements.txt         # Python dependencies
+├── .env.example             # Environment variables template
 ├── .gitignore
 ├── README.md
-└──  src/                   # Source code
+└──  src/                    # Source code
     ├── __init__.py
-    ├── analyzer.py        # Core facial analysis logic
-    ├── api.py            # FastAPI REST endpoints
-    └── app.py            # Streamlit recruiter interface
+    ├── analyzer.py          # Core facial analysis logic
+    ├── api.py               # FastAPI REST endpoints
+    └── app.py               # Streamlit recruiter interface
 ```
 
 ## Quick Start
